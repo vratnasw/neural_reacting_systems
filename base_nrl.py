@@ -37,7 +37,12 @@ class MLP(nn.module):
 
 
 class CNN(nn.module):
-	def __init__(self, n_inputs, n_hidden, n_out):		
+	def __init__(self, n_inputs, n_hidden, n_out, dropout_prob=0.0):		
 	super(CNN, self).__init__()
-	self.conv1 = nn.Conv1(n_input, n_hidden, kernel_size = 5, stride=1, padding=0)
+	self.conv1 = nn.Conv1d(n_input, n_hidden, kernel_size = 5, stride=1, padding=0)
 	self.batch1 = nn.BatchNorm1d(n_hidden)
+	self.conv2 = nn.Conv1d(n_hidden, n_hidden, kernel_size = 5, stride = 1, padding =0)
+	self.batch2 = nn.BatchNorm1d(n_hidden)
+	self.conv_final = nn.Conv1d(n_hidden, n_out, kernel_size = 1)
+	self.dropout = dropout_prob
+	self.init_weights()
