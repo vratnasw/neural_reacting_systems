@@ -46,3 +46,13 @@ class CNN(nn.module):
 	self.conv_final = nn.Conv1d(n_hidden, n_out, kernel_size = 1)
 	self.dropout = dropout_prob
 	self.init_weights()
+
+	def init_weights(self):
+		for i in self.base_nrl():
+			if isinstance(i, nn.Conv1d):
+				j = i.kernel_size[0] * i.out_channels
+				i.weight.data.normal_(0.0, math.sqrt(2.0/j))
+				i.bias.data.fill_(0.0)
+			elif isinstance(i, nn.BatchNorm1d):
+				i.weight.data.fill_(1)
+				i.bias.data.zero_()
