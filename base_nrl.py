@@ -14,7 +14,7 @@ class MLP(nn.module):
 	self.init_weights()
 
 	def init_weights():
-		for i in self.modules():
+		for i in self.base_nrl():
 			if isinstance(i, nn.Linear):
 				nn.init.xavier_normal(i.weight.data)
 				i.bias.data.fill(0.1)
@@ -34,3 +34,10 @@ class MLP(nn.module):
 		x = F.elu(self.f2(x))
 		x = self.bn(x)
 		return x
+
+
+class CNN(nn.module):
+	def __init__(self, n_inputs, n_hidden, n_out):		
+	super(CNN, self).__init__()
+	self.conv1 = nn.Conv1(n_input, n_hidden, kernel_size = 5, stride=1, padding=0)
+	self.batch1 = nn.BatchNorm1d(n_hidden)
