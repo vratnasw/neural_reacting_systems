@@ -40,3 +40,9 @@ def gumble_softmax(logits, tau=1, hard = False, epsilon=1e-10):
 		out = input_soft
 
 	return out
+
+def encode_onehot(labels):
+	idx =  np.array(idx)
+	y_idx = np.array(np.floor(idx/float(num_cols)))
+	x_idx = idx % num_cols
+	return x_idx, y_idx
