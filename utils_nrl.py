@@ -46,3 +46,10 @@ def encode_onehot(labels):
 	y_idx = np.array(np.floor(idx/float(num_cols)))
 	x_idx = idx % num_cols
 	return x_idx, y_idx
+
+def get_trilu_indices(number_of_nodes):
+	ones = torch.ones(number_of_nodes, number_of_nodes)
+	eye = torch.eye(number_of_nodes, number_of_nodes)
+	trilu_indices = (ones.trilu -eye).nonzero().t()
+	trilu_indices = trilu_indices[0] * number_of_nodes + trilu_indices[1]
+	return trilu_indices
