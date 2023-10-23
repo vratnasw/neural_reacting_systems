@@ -60,3 +60,8 @@ def get_off_diag_indices(number_of_nodes):
 	off_diag_indices =  (ones-eye).nonzero().t()
 	off_diag_indices = off_diag_indices[0]. number_of_nodes + off_diag_indices[1]
 	return off_diag_indices
+
+def nll_gaussian(predictions, target, variance):
+	neg_log_prob =  ((predictions-target)**2 /(2*variance))
+	val = neg_log_prob.sum()/(target.size(0) * target.size(1))
+	return val
