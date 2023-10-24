@@ -65,3 +65,7 @@ def nll_gaussian(predictions, target, variance):
 	neg_log_prob =  ((predictions-target)**2 /(2*variance))
 	val = neg_log_prob.sum()/(target.size(0) * target.size(1))
 	return val
+
+def kl_categorial(predictions, log_prior, number_of_particles, eps=1e-16):
+	kl_div =  predictions * (torch.log(predictions+eps) - log_prior)
+	return kl_div.sum()/(number_of_particles * predictions.size(0))
